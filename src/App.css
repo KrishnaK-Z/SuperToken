@@ -1,38 +1,125 @@
+body, h2, p, span, * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 .App {
-  text-align: center;
+  margin: 1rem;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.movies {
+  display: flex;
+  width: 100%;
+  min-width: 1300px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  transition: height .5s linear;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.movie {
+  min-width: 200px;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius : 10px;
+  background : white;
+  transition: all .2s ease-in-out;
+  box-shadow: 0 0 2rem -1rem rgba(0,0,0,0.5);
+}
+
+@media only screen and (max-width: 480px)  {
+  .movies {
+    min-width: auto;
+    overflow-y: auto;
+    flex-wrap: wrap;
+  }
+
+  .movie {
+    overflow-x: hidden;
+    flex-basis: calc(50% - 2rem);
+    min-width: 120px;
+  }
+
+  progress {
+    width: 100px;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.movie-loader {
+  min-height: 300px;
+  flex-basis: 20%;
+}
+
+.shine {
+  background: #f6f7f8;
+  background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+  background-repeat: no-repeat;
+  background-size: 800px 304px;
+  display: inline-block;
+  position: relative;
+
+  -webkit-animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-name: placeholderShimmer;
+  -webkit-animation-timing-function: linear;
+}
+
+.movie:hover {
+  transform: translateY(-0.5rem) scale(1.0125);
+  box-shadow: 0 0.5em 3rem -1rem rgba(0,0,0,0.5);
+}
+
+.movie img {
+  max-width: 100%;
+  object-fit:cover;
+}
+
+.movie h2 {
+  font-size: 1rem;
+  margin-bottom: 0.725rem;
+}
+
+.flex-center {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.overlay {
+  position: relative;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.overlay::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #E3E3E3;
+  top: 0;
+  left: 0;
+  transition: all 0.4s;
+}
+
+.overlay:hover::after {
+  opacity: 0;
+}
+
+.error-wrapper {
+  width: 100vw;
+  height: 100vh;
+}
+
+.error-wrapper button {
+  min-width: 150px;
+  max-width: 250px;
+  display: block;
+  margin: 1em;
+  padding: 1em 2em;
+  border: 1px solid;
+  background: none;
+  vertical-align: middle;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
 }
