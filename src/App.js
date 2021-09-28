@@ -11,14 +11,7 @@ const App = () => {
   // Error state.
   const [error, setError] = useState(false);
 
-  // Refresh the page.
-  const refreshPage = ()=>{
-    window.location.reload();
-  }
-
-
-  // Getting movie datas
-  useEffect(() => {
+  const loadMovies = () => {
     axios.get('https://api.themoviedb.org/3/movie/popular?api_key=40315881b5af1985a7ceba1f41b45973&language=en-US').then(data => {
       let lists = data.data.results;
 
@@ -28,10 +21,22 @@ const App = () => {
       lists[10]['adult'] = true;
 
       setMovies(lists);
+      setError(false);
     }).catch(error => {
       console.error(error);
       setError(true)
     })
+  }
+
+  // Call the API again on clicking the button.
+  const refreshApi = ()=> loadMovies();
+
+
+
+  // Getting movie data
+  useEffect(() => {
+    console.log("called");
+    loadMovies()
 
   }, []);
 
@@ -39,7 +44,7 @@ const App = () => {
   if (error) {
     return (
         <div className='error-wrapper flex-center'>
-          <button onClick={refreshPage}>Retry</button>
+          <button onClick={refreshApi}>Retry</button>
         </div>
     )
   }

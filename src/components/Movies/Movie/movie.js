@@ -1,4 +1,7 @@
-import React, {useCallback} from "react";
+import React from "react";
+import LazyImage from "../../LazyImage";
+
+
 
 const Movie = ({movie}) => {
     // Movie item details.
@@ -16,7 +19,7 @@ const Movie = ({movie}) => {
                 movie && (
                     <>
                         <div className={`img-wrapper ${adult ? 'overlay' : ''}`}>
-                            <img src={`https://www.themoviedb.org/t/p/w220_and_h330_face${moviePoster}`} alt={title}/>
+                            <LazyImage alt={title} src={moviePoster} />
                         </div>
                         <progress max="100" value={calculatePercentage(popularity)} className="html5">
                             <div className="progress-bar">

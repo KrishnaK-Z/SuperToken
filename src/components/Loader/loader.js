@@ -5,7 +5,7 @@ const Loader = () => {
     return (
         <div className='movies'>
             {[...Array(7)].map((e, i) => (
-                <div className='movie movie-loader shine' />
+                <div key={i} className='movie movie-loader shine' />
             ))}
         </div>
     )
